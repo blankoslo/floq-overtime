@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:flowtype/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "globals": {
+    "componentHandler": false,
+    "describe": false,
+    "it": false
+  },
+  "parser": "babel-eslint",
+  "plugins": ["flowtype"],
+  "rules": {
+    "comma-dangle": 0,
+    "id-length": 0,
+    "jsx-quotes": [2, "prefer-single"],
+    "no-extra-parens": 0,
+    "radix": 0,
+    "camelcase": 0,
+    "react/jsx-filename-extension": 0,
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+  }
+}
