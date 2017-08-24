@@ -27,12 +27,12 @@ function buildTableBody(overtimeGroups: Array<OvertimeGroup>) {
   const rows = [];
   overtimeGroups.forEach((group) => {
     rows.push(
-      <TableRow key={`${group.year} ${group.overtimes[0].employee.id}`}>
+      <TableRow key={`${group.year} ${group.overtimes[0].employee}`}>
         <TableHeaderColumn className='yearHeader' colSpan='4'>{group.year}</TableHeaderColumn>
       </TableRow>
     );
     rows.push(
-      <TableRow key={`header-${group.year} ${group.overtimes[0].employee.id}`}>
+      <TableRow key={`header-${group.year} ${group.overtimes[0].employee}`}>
         <TableHeaderColumn>Registrert</TableHeaderColumn>
         <TableHeaderColumn>Beskrivelse</TableHeaderColumn>
         <TableHeaderColumn>Timer</TableHeaderColumn>
@@ -40,7 +40,7 @@ function buildTableBody(overtimeGroups: Array<OvertimeGroup>) {
       </TableRow>
     );
     group.overtimes.forEach((overtime, i) => {
-      rows.push(<TableRow key={`${overtime.employee.id} ${overtime.registered_date} ${i}`}>
+      rows.push(<TableRow key={`${overtime.employee} ${overtime.registered_date} ${i}`}>
         <TableRowColumn className='registeredDate'>{formatDate(overtime.registered_date)}</TableRowColumn>
         <TableRowColumn>{overtime.comment}</TableRowColumn>
         <TableRowColumn>{overtime.minutes / 60}</TableRowColumn>
