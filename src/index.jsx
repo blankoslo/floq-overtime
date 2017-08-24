@@ -9,7 +9,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducer from './reducers';
 import App from './containers/App';
-import './index.css';
+import styles from './index.css'
 
 injectTapEventPlugin();
 
@@ -18,6 +18,7 @@ const muiTheme = getMuiTheme({
 });
 
 const middleware = [thunk];
+
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
 }
@@ -28,7 +29,7 @@ const store = createStore(
 );
 
 render(
-  <MuiThemeProvider muiTheme={muiTheme}>
+  <MuiThemeProvider muiTheme={muiTheme} store={store}>
     <Provider store={store}>
       <App />
     </Provider>
