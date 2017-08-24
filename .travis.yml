@@ -20,7 +20,7 @@ deploy:
   secret_access_key:
     secure: SKQ97hGbvqTUKoDOTzS1vCnDb/LM6fQGhWU1t7lLr0t5ejxdmat8XNFWDWO5gj+9pryNv/008aAP77nz9QEtZgJgyxBvCO7RQpMIBQu53U+dF3X9e75LFgUZY1NEKSq9VmxINldsGjIZrbLzDa9NCKW5sinENF8RkVsiYjo+EKMspJSPttR1y1W/M6BLx/wPyuR0sqBSuDu0w83mVvisKS7KyHXqHRG2sP7mlWz229vsSucG7qz+aBW1ZHOawDN+bwsD1AjvA2qDNIggMnwnvYd6e7lyUsP6/8Yl0UPFJmQX5yf+AMa/HioB5uIIJPEybJZk04KMbzjqToh+3/2bHyPEDllyNsIZxzESipI4vhTV0WCQ8LyzV6Skyzfbt00gjhnUGPVxIKjgCKXhN9g6GUAyfxJ7XpbweyGrhdBQiNNtet/7uqsKHIzvTVeqEQjmyqkWjaTwQ9xShcmi/jkznefatPvbQu9Ps+z/Bh2tQq05egmtLYif9ajN2aoFq6LSS6Gy1S1vxZtYmgI1nGpzrdUeLXONePB44Xt/OKJ8xAjdQZYDd4ocAU4Lg8XyCpP7Elytos/oVwqLRCPrIPrJ40DaCFxPgogXZe6sv0gUArObwlMMIjmy6XNbzPwX23BxCJ5MN+cAgCz75SzOOTg36QjdYW7SWZ/+CsZCzls8txc=
   bucket: floq-test
-  local-dir: build
+  local-dir: dist
   upload-dir: overtime
   skip-cleanup: true
   acl: public-read
@@ -33,7 +33,7 @@ deploy:
   secret_access_key:
     secure: SKQ97hGbvqTUKoDOTzS1vCnDb/LM6fQGhWU1t7lLr0t5ejxdmat8XNFWDWO5gj+9pryNv/008aAP77nz9QEtZgJgyxBvCO7RQpMIBQu53U+dF3X9e75LFgUZY1NEKSq9VmxINldsGjIZrbLzDa9NCKW5sinENF8RkVsiYjo+EKMspJSPttR1y1W/M6BLx/wPyuR0sqBSuDu0w83mVvisKS7KyHXqHRG2sP7mlWz229vsSucG7qz+aBW1ZHOawDN+bwsD1AjvA2qDNIggMnwnvYd6e7lyUsP6/8Yl0UPFJmQX5yf+AMa/HioB5uIIJPEybJZk04KMbzjqToh+3/2bHyPEDllyNsIZxzESipI4vhTV0WCQ8LyzV6Skyzfbt00gjhnUGPVxIKjgCKXhN9g6GUAyfxJ7XpbweyGrhdBQiNNtet/7uqsKHIzvTVeqEQjmyqkWjaTwQ9xShcmi/jkznefatPvbQu9Ps+z/Bh2tQq05egmtLYif9ajN2aoFq6LSS6Gy1S1vxZtYmgI1nGpzrdUeLXONePB44Xt/OKJ8xAjdQZYDd4ocAU4Lg8XyCpP7Elytos/oVwqLRCPrIPrJ40DaCFxPgogXZe6sv0gUArObwlMMIjmy6XNbzPwX23BxCJ5MN+cAgCz75SzOOTg36QjdYW7SWZ/+CsZCzls8txc=
   bucket: floq
-  local-dir: build
+  local-dir: dist
   upload-dir: overtime
   skip-cleanup: true
   acl: public-read
