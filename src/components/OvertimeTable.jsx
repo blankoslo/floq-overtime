@@ -57,6 +57,13 @@ function buildTableBody(overtimeGroups: Array<OvertimeGroup>) {
       </TableRow>);
     });
   });
+
+  if (rows.length === 0) {
+    rows.push(<TableRow>
+      <TableRowColumn>Du har INGEN registrerte overtidstimer.</TableRowColumn>
+        </TableRow>);
+  }
+
   return rows;
 }
 
