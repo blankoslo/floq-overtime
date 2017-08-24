@@ -50,7 +50,6 @@ const AddOvertimeView =
         className={saveFailed ? 'buttonError' : null}
         disabled={isSaving}
         label='Registrer overtid'
-        errorText='Lol'
         onClick={saveOvertime}
         primary
         style={{ marginTop: 24 }}
