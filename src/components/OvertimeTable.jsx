@@ -40,18 +40,19 @@ function buildTableBody(overtimeGroups: Array<OvertimeGroup>) {
       </TableRow>
     );
     group.overtimes.forEach((overtime, i) => {
+      console.log(overtime.paid_date);
       rows.push(<TableRow key={`${overtime.employee} ${overtime.registered_date} ${i}`}>
         <TableRowColumn className='registeredDate'>{formatDate(overtime.registered_date)}</TableRowColumn>
         <TableRowColumn>{overtime.comment}</TableRowColumn>
         <TableRowColumn>{overtime.minutes / 60}</TableRowColumn>
         <MediaQuery maxWidth={DESKTOP_BREAKPOINT - 1}>
           <TableRowColumn>
-            {overtime.paid_date !== undefined ? '✅' : ''}
+            {overtime.paid_date !== null ? '✅' : ''}
           </TableRowColumn>
         </MediaQuery>
         <MediaQuery minWidth={DESKTOP_BREAKPOINT}>
           <TableRowColumn>
-            {overtime.paid_date !== undefined ? formatDate(overtime.paid_date) : ''}
+            {overtime.paid_date !== null ? formatDate(overtime.paid_date) : ''}
           </TableRowColumn>
         </MediaQuery> 
       </TableRow>);
