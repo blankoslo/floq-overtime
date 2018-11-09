@@ -60,3 +60,12 @@ export function groupOvertimesByYear(overtimes: Array<Overtime>) {
   return groupedOvertimes;
 }
 
+export function filterPaidOutOvertimes(overtimes: Array<Overtime>) {
+  return overtimes.filter(overtime => overtime.paid_date === null);
+}
+
+export function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const options = { month: 'short', day: 'numeric' };
+  return date.toLocaleDateString('nb-no', options);
+}
