@@ -11,16 +11,10 @@ import {
 } from 'material-ui/Table';
 import MediaQuery from 'react-responsive';
 import { DESKTOP_BREAKPOINT } from '../containers/App';
-import { OvertimeGroup } from '../types/Domain';
+import { OvertimeGroup, formatDate } from '../types/Domain';
 
 type TableProps = {
   overtimeGroups: Array<OvertimeGroup>;
-}
-
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  const options = { month: 'short', day: 'numeric' };
-  return date.toLocaleDateString('nb-no', options);
 }
 
 function buildTableBody(overtimeGroups: Array<OvertimeGroup>) {
@@ -40,7 +34,6 @@ function buildTableBody(overtimeGroups: Array<OvertimeGroup>) {
       </TableRow>
     );
     group.overtimes.forEach((overtime, i) => {
-      console.log(overtime.paid_date);
       rows.push(<TableRow key={`${overtime.employee} ${overtime.registered_date} ${i}`}>
         <TableRowColumn className='registeredDate'>{formatDate(overtime.registered_date)}</TableRowColumn>
         <TableRowColumn>{overtime.comment}</TableRowColumn>

@@ -4,21 +4,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
-import AppBar from 'material-ui/AppBar';
-import Paper from 'material-ui/Paper';
-import IconButton from 'material-ui/IconButton';
 import MediaQuery from 'react-responsive';
-import FontIcon from 'material-ui/FontIcon';
+import RaisedButton from 'material-ui/RaisedButton';
 import { fetchEmployeesAndOvertime, setCurrentEmployee, saveOvertime } from '../actions';
-import OvertimeTable from '../components/OvertimeTable';
 import EmployeePicker from '../components/EmployeePicker';
-import MobileContainer from './MobileContainer';
-import AddOvertimeContainer from './AddOvertimeContainer';
 import type { State } from '../types/Domain';
 import { Employee, Overtime, groupOvertimesByYear, sortByName } from '../types/Domain';
 import '../index.css';
+import MainContainer from './MainContainer';
 
 export const DESKTOP_BREAKPOINT = 600;
+
+type LocalState = {
+  showAdmin: boolean;
+}
 
 type Props = {
   fetchEmployeesAndOvertime: Function;
@@ -30,9 +29,15 @@ type Props = {
   currentEmployee: Employee;
   isFetching: boolean;
   isSaving: boolean;
+  showAdmin: boolean;
 }
 
-class App extends Component<void, Props, void> {
+class App extends Component<void, Props, LocalState> {
+
+  state: LocalState = {
+    showAdmin: false,
+  }
+
   componentWillMount() {
     this.props.fetchEmployeesAndOvertime();
   }
@@ -53,35 +58,31 @@ class App extends Component<void, Props, void> {
               setCurrentEmployee={this.props.setCurrentEmployee}
             /> : null}
           </ToolbarGroup>
+          <MediaQuery minWidth={DESKTOP_BREAKPOINT}>
+            <ToolbarGroup>
+              <RaisedButton
+                onClick={this.toggleAdmin}
+                label={this.state.showAdmin ? 'Hovedside' : 'Admin'}
+                primary
+                style={{ marginTop: 12 }}
+              />
+            </ToolbarGroup>
+          </MediaQuery>
         </Toolbar>
-        <MediaQuery minWidth={DESKTOP_BREAKPOINT} className='desktopView'>
-          <Paper className='addOvertimeWrapper'>
-            <AppBar
-              title='Registrer overtid'
-              iconElementLeft={<IconButton><FontIcon className='material-icons'>note_add</FontIcon></IconButton>}
-            />
-            <AddOvertimeContainer
-              isSaving={this.props.isSaving}
-              saveOvertime={this.props.saveOvertime}
-            />
-          </Paper>
-          <Paper className='tableWrapper'>
-            <AppBar
-              title='Oversikt'
-              iconElementLeft={<IconButton><FontIcon className='material-icons'>list</FontIcon></IconButton>}
-            />
-            <OvertimeTable overtimeGroups={overtimeGroups} />
-          </Paper>
-        </MediaQuery>
-        <MediaQuery maxWidth={DESKTOP_BREAKPOINT - 1}>
-          <MobileContainer
-            overtimeGroups={overtimeGroups}
-            isSaving={this.props.isSaving}
-            saveOvertime={saveOvertime}
-          />
-        </MediaQuery>
+        <MainContainer
+          showAdmin={this.state.showAdmin}
+          isSaving={this.props.isSaving}
+          saveOvertime={this.props.saveOvertime}
+          overtimeGroups={overtimeGroups}
+          overtime={this.props.overtimes}
+          employees={this.props.employees}
+        />
       </div>
     );
+  }
+
+  toggleAdmin = () => {
+    this.setState({ showAdmin: this.state.showAdmin ? false : true });
   }
 }
 
