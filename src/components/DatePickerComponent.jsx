@@ -73,7 +73,7 @@ export default class DatePickerComponent extends Component<void, Props, LocalSta
 
   saveNewDate = () => {
     this.closeModal();
-    this.props.handleDateSave(this.state.controlledDate);
+    this.props.handleDateSave(this.props.overtime.id, this.state.controlledDate);
   }
 
   openModal = () => {

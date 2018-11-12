@@ -32,6 +32,7 @@ export const fetchEmployees = () =>
 
 export const fetchOvertime = () =>
   fetch(`${baseURL}/paid_overtime?select=
+    id,
     employee,
     paid_date,
     minutes,
@@ -47,3 +48,13 @@ export const addOvertime = body => fetch(`${baseURL}/paid_overtime`, {
   body: JSON.stringify(body)
 }).then(handleErrors)
   .then(response => response.json());
+
+export const changePaidDate = (id, paid_date) =>
+  fetch(`${baseURL}/paid_overtime?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: dataHeaders,
+      body: JSON.stringify({
+        paid_date: paid_date
+      })
+    }).then(handleErrors)
+    .then(response => response.json());

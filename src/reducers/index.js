@@ -16,7 +16,9 @@ const initialState: State = {
   saveComplete: false,
   saveFailed: false,
   hours: 0,
-  comment: ''
+  comment: '',
+  savePaidDateFailed: false,
+  savePaidDateCompleted: false,
 };
 
 export default function reducer(state: State = initialState, action: Action) {
@@ -66,6 +68,22 @@ export default function reducer(state: State = initialState, action: Action) {
         overtimes: action.overtimes,
         currentEmployee: action.employees.find(x => config.userEmail === x.email)
       });
+
+    case 'SAVE_PAID_DATE_COMPLETED':
+      const updatedObj = [...state.overtimes];
+      const index = state.overtimes.findIndex(overtime => overtime.id == action.overtime[0].id);
+      updatedObj[index] = action.overtime[0];
+      return Object.assign({}, state, {
+        overtimes: updatedObj,
+        savePaidDateCompleted: true,
+        savePaidDateFailed: false,
+      });
+    case 'SAVE_PAID_DATE_FAILED':
+      return Object.assign({}, state, {
+        savePaidDateFailed: true,
+        savePaidDateCompleted: false,
+      });
+
     default:
       return state;
   }

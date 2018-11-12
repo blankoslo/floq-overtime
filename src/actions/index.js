@@ -19,6 +19,8 @@ type ReceiveOvertimeAndEmployeesAction = {
   overtimes: JSON;
   employees: JSON;
 }
+type savePaidDateCompletedAction = { type: 'SAVE_PAID_DATE_COMPLETED'; overtime: Overtime[] }
+type savePaidDateFailedAction = { type: 'SAVE_PAID_DATE_FAILED'; }
 
 export type Action =
   | RequestOvertimeAction
@@ -32,6 +34,8 @@ export type Action =
   | SaveOvertimeCompletedAction
   | SaveOvertimeFailedAction
   | ReceiveOvertimeAndEmployeesAction
+  | savePaidDateCompletedAction
+  | savePaidDateFailedAction;
 
 export function requestEmployees(): RequestEmployeesAction {
   return { type: 'REQUEST_EMPLOYEES' };
@@ -78,6 +82,14 @@ export function saveOvertimeFailed(): SaveOvertimeFailedAction {
   return { type: 'SAVE_OVERTIME_FAILED' };
 }
 
+export function savePaidDateCompleted(overtime: Overtime[]): savePaidDateCompletedAction {
+  return { type: 'SAVE_PAID_DATE_COMPLETED', overtime};
+}
+
+export function savePaidDateFailed(): savePaidDateFailedAction {
+  return { type: 'SAVE_PAID_DATE_FAILED' };
+}
+
 function getOvertime() {
   return dispatch =>
     api.fetchOvertime().then(
@@ -121,3 +133,14 @@ export const fetchEmployeesAndOvertime = () => (dispatch: Function) => {
     err => dispatch({ type: 'SOMETHING_FAILED', err })
   );
 };
+
+export const updatePaidDate = (id: number, paid_date: string) =>
+  (dispatch: Function) => {
+    api.changePaidDate(id, paid_date).then(
+      (json: Overtime[]) => {
+        dispatch(savePaidDateCompleted(json));
+      }
+    ).catch(() => {
+      dispatch(savePaidDateFailed());
+    });
+  };
