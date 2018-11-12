@@ -11,7 +11,7 @@ import EmployeePicker from '../components/EmployeePicker';
 import type { State } from '../types/Domain';
 import { Employee, Overtime, groupOvertimesByYear, sortByName } from '../types/Domain';
 import '../index.css';
-import MainContainer from './MainContainer';
+import Main from '../components/Main';
 
 export const DESKTOP_BREAKPOINT = 600;
 
@@ -69,7 +69,7 @@ class App extends Component<void, Props, LocalState> {
             </ToolbarGroup>
           </MediaQuery>
         </Toolbar>
-        <MainContainer
+        <Main
           showAdmin={this.state.showAdmin}
           isSaving={this.props.isSaving}
           saveOvertime={this.props.saveOvertime}
