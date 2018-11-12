@@ -13,7 +13,9 @@ describe('set current employee reducer', () => {
         saveComplete: false,
         saveFailed: false,
         hours: 0,
-        comment: ''
+        comment: '',
+        savePaidDateFailed: false,
+        savePaidDateCompleted: false,
       }
     );
   });
