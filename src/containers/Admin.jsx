@@ -23,10 +23,10 @@ type Props = {
   employees: Array<Employee>
 }
 
-class AdminContainer extends Component<void, Props, LocalState> {
+class Admin extends Component<void, Props, LocalState> {
 
   state: LocalState = {
-    showAllOvertime: false
+    showAllOvertime: false,
   }
 
   render() {
@@ -52,6 +52,7 @@ class AdminContainer extends Component<void, Props, LocalState> {
         <AdminOvertimeTable
           overtimeGroups={overtimeGroups}
           employees={this.props.employees}
+          handleDateSave={this.handleDateSave}
         />
       </Paper>
     );
@@ -60,6 +61,10 @@ class AdminContainer extends Component<void, Props, LocalState> {
   toggleAbsence = () => {
     this.setState({ showAllOvertime: this.state.showAllOvertime ? false : true });
   }
+
+  handleDateSave = (date : Date) => {
+    
+  };
 }
 
 const mapStateToProps = (state: State) => ({
@@ -70,4 +75,4 @@ const mapDispatchToProps = (dispatch: *) => bindActionCreators({
 
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);

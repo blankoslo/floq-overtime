@@ -6,11 +6,11 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import MediaQuery from 'react-responsive';
 import FontIcon from 'material-ui/FontIcon';
-import OvertimeTable from '../components/OvertimeTable';
-import MobileContainer from './MobileContainer';
-import AddOvertimeContainer from './AddOvertimeContainer';
+import OvertimeTable from './OvertimeTable';
+import Mobile from './Mobile';
+import AddOvertimeContainer from '../containers/AddOvertimeContainer';
 import { OvertimeGroup, Overtime, Employee } from '../types/Domain';
-import AdminContainer from './AdminContainer';
+import Admin from '../containers/Admin';
 
 export const DESKTOP_BREAKPOINT = 600;
 
@@ -23,12 +23,12 @@ type Props = {
   employees: Array<Employee>;
 }
 
-class MainContainer extends Component<void, Props, void> {
+export default class Main extends Component<void, Props, void> {
 
   render() {
     if (this.props.showAdmin) {
       return (
-        <AdminContainer
+        <Admin
           overtime={this.props.overtime}
           employees={this.props.employees}
         />
@@ -57,7 +57,7 @@ class MainContainer extends Component<void, Props, void> {
           </Paper>
         </MediaQuery>
         <MediaQuery maxWidth={DESKTOP_BREAKPOINT - 1}>
-          <MobileContainer
+          <Mobile
             overtimeGroups={this.props.overtimeGroups}
             isSaving={this.props.isSaving}
             saveOvertime={this.props.saveOvertime}
@@ -67,5 +67,3 @@ class MainContainer extends Component<void, Props, void> {
     );
   }
 }
-
-export default MainContainer;

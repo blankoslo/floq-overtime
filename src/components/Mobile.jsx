@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Tabs, Tab } from 'material-ui/Tabs';
-import OvertimeTable from '../components/OvertimeTable';
-import AddOvertimeContainer from './AddOvertimeContainer';
+import OvertimeTable from './OvertimeTable';
+import AddOvertimeContainer from '../containers/AddOvertimeContainer';
 import { OvertimeGroup } from '../types/Domain';
 import '../index.css';
 
@@ -14,7 +14,7 @@ type Props = {
 }
 
 
-const MobileContainer = ({ overtimeGroups, isSaving, saveOvertime }: Props) => (
+const Mobile = ({ overtimeGroups, isSaving, saveOvertime }: Props) => (
   <Tabs>
     <Tab label='Registrer' >
       <AddOvertimeContainer
@@ -30,4 +30,4 @@ const MobileContainer = ({ overtimeGroups, isSaving, saveOvertime }: Props) => (
   </Tabs >
 );
 
-export default MobileContainer;
+export default Mobile;
