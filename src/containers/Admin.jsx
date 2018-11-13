@@ -51,12 +51,12 @@ class Admin extends Component<void, Props, LocalState> {
     return (
       <Paper className='adminWrapper'>
         <AppBar
-          title='Registrerte fraværstimer'
+          title='Registrerte overtidstimer'
           iconElementLeft={<IconButton><FontIcon className='material-icons'>list</FontIcon></IconButton>}>
           <div>
             <Button
               onClick={this.toggleAbsence}
-              label={this.state.showAllOvertime ? 'Vis kun ikke utbetalt fravær' : 'Vis alt fravær'}
+              label={this.state.showAllOvertime ? 'Vis kun ikke utbetalt overtid' : 'Vis all registrert overtid'}
               default
               style={{ margin: 10 }}
             />
