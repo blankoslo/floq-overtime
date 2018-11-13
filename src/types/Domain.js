@@ -1,22 +1,23 @@
 // @flow
 
 export class Employee {
-    id: string;
-    first_name: string;
-    last_name: string;
+  id: string;
+  first_name: string;
+  last_name: string;
 }
 
 export class Overtime {
-    comment: string;
-    minutes: number;
-    paid_date: string;
-    registered_date: string;
-    employee: number;
+  id: number;
+  comment: string;
+  minutes: number;
+  paid_date: string;
+  registered_date: string;
+  employee: number;
 }
 
 export class OvertimeGroup {
-    year: number;
-    overtimes: Array<Overtime>;
+  year: number;
+  overtimes: Array<Overtime>;
 }
 
 export type State = {
@@ -29,6 +30,8 @@ export type State = {
   saveFailed: boolean;
   comment: string;
   hours: number;
+  savePaidDateFailed: boolean;
+  savePaidDateCompleted: boolean;
 }
 
 export function sortByName(a: Employee, b: Employee) {
@@ -60,3 +63,12 @@ export function groupOvertimesByYear(overtimes: Array<Overtime>) {
   return groupedOvertimes;
 }
 
+export function filterPaidOutOvertimes(overtimes: Array<Overtime>) {
+  return overtimes.filter(overtime => overtime.paid_date === null);
+}
+
+export function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const options = { month: 'short', day: 'numeric' };
+  return date.toLocaleDateString('nb-no', options);
+}
