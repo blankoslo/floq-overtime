@@ -10,6 +10,7 @@ describe('set current employee reducer', () => {
         overtimes: [],
         employees: [],
         currentEmployee: null,
+        loggedInEmployee: null,
         saveComplete: false,
         saveFailed: false,
         hours: 0,
@@ -27,14 +28,16 @@ describe('set current employee reducer', () => {
           overtimes: [],
           currentOvertimes: [],
           employees: [{ id: '1', first_name: 'rolf' }, { id: '2', first_name: 'ane' }],
-          currentEmployee: null
+          currentEmployee: null,
+          loggedInEmployee: null
         }, setCurrentEmployee('1')
       )
     ).toEqual({
       overtimes: [],
       currentOvertimes: [],
       employees: [{ id: '1', first_name: 'rolf' }, { id: '2', first_name: 'ane' }],
-      currentEmployee: { id: '1', first_name: 'rolf' }
+      currentEmployee: { id: '1', first_name: 'rolf' },
+      loggedInEmployee: null
     });
   });
 });
