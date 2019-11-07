@@ -13,6 +13,7 @@ const initialState: State = {
   overtimes: [],
   employees: [],
   currentEmployee: null,
+  loggedInEmployee: null,
   saveComplete: false,
   saveFailed: false,
   hours: 0,
@@ -63,10 +64,13 @@ export default function reducer(state: State = initialState, action: Action) {
         saveFailed: true
       });
     case 'RECEIVE_OVERTIME_AND_EMPLOYEES':
+      const employee = action.employees.find(e => config.userEmail === e.email);
+
       return Object.assign({}, state, {
         employees: action.employees,
         overtimes: action.overtimes,
-        currentEmployee: action.employees.find(x => config.userEmail === x.email)
+        currentEmployee: employee,
+        loggedInEmployee: employee
       });
 
     case 'SAVE_PAID_DATE_COMPLETED':
