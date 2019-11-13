@@ -13,6 +13,7 @@ const initialState: State = {
   overtimes: [],
   employees: [],
   currentEmployee: null,
+  loggedInEmployee: null,
   saveComplete: false,
   saveFailed: false,
   hours: 0,
@@ -63,15 +64,24 @@ export default function reducer(state: State = initialState, action: Action) {
         saveFailed: true
       });
     case 'RECEIVE_OVERTIME_AND_EMPLOYEES':
-      return Object.assign({}, state, {
-        employees: action.employees,
-        overtimes: action.overtimes,
-        currentEmployee: action.employees.find(x => config.userEmail === x.email)
-      });
+      const employees = action.employees.map(e => ({
+        id: e.employee.id,
+        email: e.employee.email,
+        first_name: e.employee.first_name,
+        last_name: e.employee.last_name,
+        roles: e.roles
+      }));
+      const loggedInEmployee = employees.find(e => config.userEmail === e.email);
 
+      return Object.assign({}, state, {
+        employees,
+        overtimes: action.overtimes,
+        currentEmployee: loggedInEmployee,
+        loggedInEmployee
+      });
     case 'SAVE_PAID_DATE_COMPLETED':
       const updatedObj = [...state.overtimes];
-      const index = state.overtimes.findIndex(overtime => overtime.id == action.overtime[0].id);
+      const index = state.overtimes.findIndex(overtime => overtime.id === action.overtime[0].id);
       updatedObj[index] = action.overtime[0];
       return Object.assign({}, state, {
         overtimes: updatedObj,
