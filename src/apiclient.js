@@ -28,7 +28,8 @@ function handleErrors(response) {
 export const fetchEmployees = () =>
   fetch(`${baseURL}/rpc/employees_roles`, {
     headers
-  }).then(response => response.json());
+  })
+    .then(response => response.json());
 
 export const fetchOvertime = () =>
   fetch(`${baseURL}/paid_overtime?select=
