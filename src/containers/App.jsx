@@ -6,10 +6,10 @@ import { bindActionCreators } from 'redux';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
-import { fetchEmployeesAndOvertime, setCurrentEmployee, saveOvertime } from '../actions';
+import { fetchEmployeesAndOvertime, saveOvertime, setCurrentEmployee } from '../actions';
 import EmployeePicker from '../components/EmployeePicker';
 import type { State } from '../types/Domain';
-import { Employee, Overtime, groupOvertimesByYear, sortByName } from '../types/Domain';
+import { Employee, groupOvertimesByYear, Overtime, sortByName } from '../types/Domain';
 import '../index.css';
 import Main from '../components/Main';
 
@@ -27,6 +27,7 @@ type Props = {
   overtimes: Array<Overtime>;
   currentOvertimes: Array<Overtime>;
   currentEmployee: Employee;
+  loggedInEmployee: Employee,
   isFetching: boolean;
   isSaving: boolean;
   showAdmin: boolean;
@@ -36,7 +37,7 @@ class App extends Component<void, Props, LocalState> {
 
   state: LocalState = {
     showAdmin: false,
-  }
+  };
 
   componentWillMount() {
     this.props.fetchEmployeesAndOvertime();
@@ -47,6 +48,8 @@ class App extends Component<void, Props, LocalState> {
     const currentEmployee = this.props.currentEmployee;
     const currentOvertimes = this.props.overtimes.filter(x => x.employee === currentEmployee.id);
     const overtimeGroups = groupOvertimesByYear(currentOvertimes);
+    const isAdmin = this.props.loggedInEmployee !== null &&
+      this.props.loggedInEmployee.roles.includes('admin');
 
     return (
       <div id='outer'>
@@ -60,12 +63,14 @@ class App extends Component<void, Props, LocalState> {
           </ToolbarGroup>
           <MediaQuery minWidth={DESKTOP_BREAKPOINT}>
             <ToolbarGroup>
+              {isAdmin &&
               <RaisedButton
                 onClick={this.toggleAdmin}
                 label={this.state.showAdmin ? 'Hovedside' : 'Admin'}
                 primary
                 style={{ marginTop: 12 }}
               />
+              }
             </ToolbarGroup>
           </MediaQuery>
         </Toolbar>
@@ -82,8 +87,8 @@ class App extends Component<void, Props, LocalState> {
   }
 
   toggleAdmin = () => {
-    this.setState({ showAdmin: this.state.showAdmin ? false : true });
-  }
+    this.setState({ showAdmin: !this.state.showAdmin });
+  };
 }
 
 const mapStateToProps = (state: State) => ({
@@ -91,7 +96,8 @@ const mapStateToProps = (state: State) => ({
   isSaving: state.isSaving,
   overtimes: state.overtimes,
   employees: state.employees,
-  currentEmployee: state.currentEmployee
+  currentEmployee: state.currentEmployee,
+  loggedInEmployee: state.loggedInEmployee
 });
 
 const mapDispatchToProps = (dispatch: *) => bindActionCreators({

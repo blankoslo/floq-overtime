@@ -4,6 +4,7 @@ export class Employee {
   id: string;
   first_name: string;
   last_name: string;
+  roles: string[];
 }
 
 export class Overtime {
@@ -26,6 +27,7 @@ export type State = {
   overtimes: Array<Overtime>;
   employees: Array<Employee>;
   currentEmployee: ?Employee;
+  loggedInEmployee: ?Employee;
   saveComplete: boolean;
   saveFailed: boolean;
   comment: string;
