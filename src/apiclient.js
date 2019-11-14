@@ -27,6 +27,7 @@ function handleErrors(response) {
 
 export const fetchEmployees = () =>
   fetch(`${baseURL}/rpc/employees_roles`, {
+    method: 'POST',
     headers
   })
     .then(response => response.json());
